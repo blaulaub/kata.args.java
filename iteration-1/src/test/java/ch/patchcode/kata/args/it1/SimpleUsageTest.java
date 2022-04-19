@@ -2,12 +2,12 @@ package ch.patchcode.kata.args.it1;
 
 import org.junit.jupiter.api.Test;
 
-public class FirstTest {
+public class SimpleUsageTest {
 
     @Test
-    void test() {
+    void simpleUsageWithoutAssertingResults() {
         String schema = "h";
         String args[] = {"-h"};
-        Args.parse(schema, args);
+        Args result = Args.parse(schema, args);
     }
 }
