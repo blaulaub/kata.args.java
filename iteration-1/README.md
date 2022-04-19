@@ -43,3 +43,10 @@ I expect there will be two main things coming out:
 - ArgParser: code to parse the arguments and construct the result
 
 ### Step 5: Implement
+
+...ongoing
+
+# Ideas for future changes
+
+- when an unexpected argument is encountered, include its
+  position in the error message (for better usability)
