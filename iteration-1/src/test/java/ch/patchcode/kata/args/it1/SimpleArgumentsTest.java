@@ -10,7 +10,7 @@ public class SimpleArgumentsTest {
     void parseOneSimpleArgument() {
         String schema = "h";
         String args[] = {"-h"};
-        Args result = Args.parse(schema, args);
+        Args result = ArgsFactory.parse(schema, args);
         assertEquals(1, result.size());
         assertNotNull(result.findArg("h"));
     }
