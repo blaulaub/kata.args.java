@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 public class SimpleUsageTest {
 
     @Test
-    void simpleUsageWithoutAssertingResults() {
+    void useWithoutAssertingResults() {
         String schema = "h";
         String args[] = {"-h"};
         Args result = Args.parse(schema, args);
