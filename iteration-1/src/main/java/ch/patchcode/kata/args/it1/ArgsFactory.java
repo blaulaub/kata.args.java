@@ -7,9 +7,10 @@ import java.util.Objects;
 public class ArgsFactory {
     public static Args parse(String schema, String[] args) {
         Objects.requireNonNull(schema);
+        var schemaParts = schema.split("\\|");
         List<Arg> parsedArgs = new ArrayList<>();
         for (String arg: args) {
-            String letter = schema;
+            String letter = schemaParts[0];
             if (!arg.equals("-" + letter)) {
                 throw new UnexpectedArgumentException(arg);
             }

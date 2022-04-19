@@ -14,4 +14,14 @@ public class SimpleArgumentsTest {
         assertEquals(1, result.size());
         assertNotNull(result.findArg("h"));
     }
+
+    @Test
+    void parseFirstOfTwoSimpleArguments() {
+        String schema = "h|v";
+        String args[] = {"-h"};
+        Args result = ArgsFactory.parse(schema, args);
+        assertEquals(1, result.size());
+        assertNotNull(result.findArg("h"));
+        assertNull(result.findArg("v"));
+    }
 }
