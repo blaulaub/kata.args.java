@@ -28,4 +28,18 @@ public class ErrorHandlingTest {
         String args[] = {"nodash"};
         assertThrows(Args.UnexpectedArgumentException.class, () -> Args.parse(schema, args));
     }
+
+    @Test
+    void nullSchema_throwsException() {
+        String schema = null;
+        String args[] = {""};
+        assertThrows(NullPointerException.class, () -> Args.parse(schema, args));
+    }
+
+    @Test
+    void nullArgs_throwsException() {
+        String schema = "";
+        String args[] = null;
+        assertThrows(NullPointerException.class, () -> Args.parse(schema, args));
+    }
 }
