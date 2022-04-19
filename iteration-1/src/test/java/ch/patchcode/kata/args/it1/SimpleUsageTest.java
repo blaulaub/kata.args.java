@@ -10,7 +10,7 @@ public class SimpleUsageTest {
     void useWithoutAssertingResults() {
         String schema = "h";
         String args[] = {"-h"};
-        Args result = ignoreExceptions(() -> ArgsFactory.parse(schema, args));
+        Args result = ignoreExceptions(() -> new ArgsBuilder().parse(schema, args).build());
     }
 
     private <TResult> TResult ignoreExceptions(Supplier<TResult> supplier) {

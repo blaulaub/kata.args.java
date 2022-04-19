@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ArgsFactory {
-    public static Args parse(String schema, String[] args) {
+public class ArgsBuilder {
+
+    private final List<Arg> parsedArgs = new ArrayList<>();
+
+    public ArgsBuilder parse(String schema, String[] args) {
         Objects.requireNonNull(schema);
         var schemaParts = schema.split("\\|");
-        List<Arg> parsedArgs = new ArrayList<>();
         for (String arg: args) {
             String letter = schemaParts[0];
             if (!arg.equals("-" + letter)) {
@@ -16,6 +18,10 @@ public class ArgsFactory {
             }
             parsedArgs.add(new Arg(letter));
         }
+        return this;
+    }
+
+    public Args build() {
         return new Args(parsedArgs);
     }
 

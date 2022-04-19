@@ -10,7 +10,7 @@ public class ErrorHandlingTest {
     void runWithoutSchemaOrArgs_returnEmpty() {
         String schema = "";
         String args[] = {};
-        Args result = ArgsFactory.parse(schema, args);
+        Args result = new ArgsBuilder().parse(schema, args).build();
         assertEquals(0, result.size());
         assertNull(result.findArg("h"));
     }
@@ -19,27 +19,27 @@ public class ErrorHandlingTest {
     void unexpectedArg_throwsException() {
         String schema = "";
         String args[] = {"-h"};
-        assertThrows(ArgsFactory.UnexpectedArgumentException.class, () -> ArgsFactory.parse(schema, args));
+        assertThrows(ArgsBuilder.UnexpectedArgumentException.class, () -> new ArgsBuilder().parse(schema, args).build());
     }
 
     @Test
     void argWithoutLeadingDash_throwsException() {
         String schema = "";
         String args[] = {"nodash"};
-        assertThrows(ArgsFactory.UnexpectedArgumentException.class, () -> ArgsFactory.parse(schema, args));
+        assertThrows(ArgsBuilder.UnexpectedArgumentException.class, () -> new ArgsBuilder().parse(schema, args).build());
     }
 
     @Test
     void nullSchema_throwsException() {
         String schema = null;
         String args[] = {""};
-        assertThrows(NullPointerException.class, () -> ArgsFactory.parse(schema, args));
+        assertThrows(NullPointerException.class, () -> new ArgsBuilder().parse(schema, args).build());
     }
 
     @Test
     void nullArgs_throwsException() {
         String schema = "";
         String args[] = null;
-        assertThrows(NullPointerException.class, () -> ArgsFactory.parse(schema, args));
+        assertThrows(NullPointerException.class, () -> new ArgsBuilder().parse(schema, args).build());
     }
 }
