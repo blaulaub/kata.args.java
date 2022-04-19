@@ -59,3 +59,7 @@ I expect there will be two main things coming out:
 
 - commit timer: how long ago was my last (local) commit or
   my last (public) push; have I got stuck or delayed?
+  - timer reset when:
+    1. committing
+    2. resetting
+  - what about stashing?

@@ -1,21 +1,29 @@
 package ch.patchcode.kata.args.it1;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ArgsBuilder {
 
-    private final String[] schemaParts;
+    private final Map<String, Parameter> schemaParts;
     private final List<Arg> parsedArgs = new ArrayList<>();
 
     public ArgsBuilder(String schema) {
-        this.schemaParts = schema.split("\\|");
+        this.schemaParts = Arrays
+                .stream(schema.split("\\|"))
+                .filter(it -> !it.isEmpty())
+                .map(it -> {
+                    var shortOptionLetter = it.substring(0, 1);
+                    var modifier = it.length() > 1 ? it.substring(1) : "";
+                    return new Parameter(shortOptionLetter, modifier);
+                })
+                .collect(Collectors.<Parameter, String, Parameter>toMap(Parameter::shortOptionLetter, it -> it));
     }
 
     public ArgsBuilder parse(String[] args) {
         for (String arg: args) {
-            String letter = schemaParts[0];
+            if (!schemaParts.containsKey("h")) throw new UnexpectedArgumentException(arg);
+            String letter = schemaParts.get("h").shortOptionLetter();
             tryMatchArgWithLetter(arg, letter);
         }
         return this;
