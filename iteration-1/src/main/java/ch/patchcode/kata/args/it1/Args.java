@@ -13,7 +13,9 @@ public class Args {
     public static Args parse(String schema, String[] args) {
         Objects.requireNonNull(schema);
         for (String arg: args) {
-            throw new UnexpectedArgumentException(arg);
+            if (!arg.equals("-" + schema)) {
+                throw new UnexpectedArgumentException(arg);
+            }
         }
         return new Args();
     }
