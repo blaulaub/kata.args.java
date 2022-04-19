@@ -3,6 +3,8 @@ package ch.patchcode.kata.args.it1;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.Arrays.asList;
+
 public class ArgsBuilder {
 
     private final Map<String, Parameter> schemaParts;
@@ -17,7 +19,9 @@ public class ArgsBuilder {
     }
 
     public ArgsBuilder parse(String[] args) {
-        for (String arg: args) {
+        var argList = new LinkedList<>(asList(args));
+        while (!argList.isEmpty()) {
+            var arg = argList.pollFirst();
 
             if (!arg.startsWith("-")) throw new UnexpectedArgumentException(arg);
             String shortOptionLetter = arg.substring(1);
