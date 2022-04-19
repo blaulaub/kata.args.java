@@ -13,12 +13,16 @@ public class ArgsBuilder {
         var schemaParts = schema.split("\\|");
         for (String arg: args) {
             String letter = schemaParts[0];
-            if (!arg.equals("-" + letter)) {
-                throw new UnexpectedArgumentException(arg);
-            }
-            parsedArgs.add(new Arg(letter));
+            tryMatchArgWithLetter(arg, letter);
         }
         return this;
+    }
+
+    private void tryMatchArgWithLetter(String arg, String letter) {
+        if (!arg.equals("-" + letter)) {
+            throw new UnexpectedArgumentException(arg);
+        }
+        parsedArgs.add(new Arg(letter));
     }
 
     public Args build() {
