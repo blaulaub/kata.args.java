@@ -22,7 +22,9 @@ public class ArgsBuilder {
     }
 
     private void tryMatchArgWithLetter(String arg, String letter) {
-        if (!arg.equals("-" + letter)) {
+        if (!arg.startsWith("-")) throw new UnexpectedArgumentException(arg);
+        arg = arg.substring(1);
+        if (!arg.equals(letter)) {
             throw new UnexpectedArgumentException(arg);
         }
         parsedArgs.add(new Arg(letter));
