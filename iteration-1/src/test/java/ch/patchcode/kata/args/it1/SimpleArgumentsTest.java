@@ -34,4 +34,14 @@ public class SimpleArgumentsTest {
         assertNotNull(result.findArg("h"));
         assertNotNull(result.findArg("v"));
     }
+
+    @Test
+    void parseSecondOfTwoSimpleArguments() {
+        String schema = "h|v";
+        String args[] = {"-v"};
+        Args result = new ArgsBuilder(schema).parse(args).build();
+        assertEquals(1, result.size());
+        assertNull(result.findArg("h"));
+        assertNotNull(result.findArg("v"));
+    }
 }
