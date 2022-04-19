@@ -21,4 +21,11 @@ public class ErrorHandlingTest {
         String args[] = {"-h"};
         assertThrows(Args.UnexpectedArgumentException.class, () -> Args.parse(schema, args));
     }
+
+    @Test
+    void argWithoutLeadingDash_throwsException() {
+        String schema = "";
+        String args[] = {"nodash"};
+        assertThrows(Args.UnexpectedArgumentException.class, () -> Args.parse(schema, args));
+    }
 }
