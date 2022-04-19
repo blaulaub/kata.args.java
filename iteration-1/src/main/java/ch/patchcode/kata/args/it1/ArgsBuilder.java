@@ -6,11 +6,14 @@ import java.util.Objects;
 
 public class ArgsBuilder {
 
+    private final String[] schemaParts;
     private final List<Arg> parsedArgs = new ArrayList<>();
 
-    public ArgsBuilder parse(String schema, String[] args) {
-        Objects.requireNonNull(schema);
-        var schemaParts = schema.split("\\|");
+    public ArgsBuilder(String schema) {
+        this.schemaParts = schema.split("\\|");
+    }
+
+    public ArgsBuilder parse(String[] args) {
         for (String arg: args) {
             String letter = schemaParts[0];
             tryMatchArgWithLetter(arg, letter);
