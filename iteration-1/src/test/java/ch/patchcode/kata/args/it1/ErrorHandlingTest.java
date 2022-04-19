@@ -2,8 +2,7 @@ package ch.patchcode.kata.args.it1;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ErrorHandlingTest {
 
@@ -13,6 +12,7 @@ public class ErrorHandlingTest {
         String args[] = {};
         Args result = Args.parse(schema, args);
         assertEquals(0, result.size());
+        assertNull(result.findArg("h"));
     }
 
     @Test

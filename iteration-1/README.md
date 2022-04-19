@@ -46,7 +46,16 @@ I expect there will be two main things coming out:
 
 ...ongoing
 
+# Unexpected time-outs
+
+- how to use Hamcrest with JUnit5 (simple answer by stack Overflow)
+
 # Ideas for future changes
 
 - when an unexpected argument is encountered, include its
   position in the error message (for better usability)
+
+# Other ideas
+
+- commit timer: how long ago was my last (local) commit or
+  my last (public) push; have I got stuck or delayed?

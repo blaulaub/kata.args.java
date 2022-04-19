@@ -1,10 +1,12 @@
 package ch.patchcode.kata.args.it1;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Args {
 
-    private final int count;
+    private final List<Arg> args;
 
     public static class UnexpectedArgumentException extends RuntimeException {
         public UnexpectedArgumentException(String arg) {
@@ -12,23 +14,31 @@ public class Args {
         }
     }
 
-    public Args(int count) {
-        this.count = count;
+    public Args(List<Arg> args) {
+        this.args = new ArrayList<>(args);
     }
 
     public static Args parse(String schema, String[] args) {
         Objects.requireNonNull(schema);
-        int count = 0;
+        List<Arg> parsedArgs = new ArrayList<>();
         for (String arg: args) {
-            if (!arg.equals("-" + schema)) {
+            String letter = schema;
+            if (!arg.equals("-" + letter)) {
                 throw new UnexpectedArgumentException(arg);
             }
-            count++;
+            parsedArgs.add(new Arg(letter));
         }
-        return new Args(count);
+        return new Args(parsedArgs);
+    }
+
+    public Arg findArg(String h) {
+        for (var arg: args) {
+            if (arg.matchesShortOptionLetter(h)) return arg;
+        }
+        return null;
     }
 
     public int size() {
-        return count;
+        return args.size();
     }
 }

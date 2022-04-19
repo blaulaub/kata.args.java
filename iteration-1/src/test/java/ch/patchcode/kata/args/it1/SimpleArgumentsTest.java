@@ -2,7 +2,7 @@ package ch.patchcode.kata.args.it1;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SimpleArgumentsTest {
 
@@ -12,6 +12,6 @@ public class SimpleArgumentsTest {
         String args[] = {"-h"};
         Args result = Args.parse(schema, args);
         assertEquals(1, result.size());
+        assertNotNull(result.findArg("h"));
     }
-
 }
