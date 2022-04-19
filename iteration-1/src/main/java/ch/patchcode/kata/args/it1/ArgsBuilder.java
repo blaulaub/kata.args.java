@@ -18,20 +18,15 @@ public class ArgsBuilder {
 
     public ArgsBuilder parse(String[] args) {
         for (String arg: args) {
-            if (!schemaParts.containsKey("h")) throw new UnexpectedArgumentException(arg);
-            String letter = schemaParts.get("h").shortOptionLetter();
-            tryMatchArgWithLetter(arg, letter);
+
+            if (!arg.startsWith("-")) throw new UnexpectedArgumentException(arg);
+            String shortOptionLetter = arg.substring(1);
+
+            if (!schemaParts.containsKey(shortOptionLetter)) throw new UnexpectedArgumentException(arg);
+
+            parsedArgs.add(new Arg(shortOptionLetter));
         }
         return this;
-    }
-
-    private void tryMatchArgWithLetter(String arg, String letter) {
-        if (!arg.startsWith("-")) throw new UnexpectedArgumentException(arg);
-        arg = arg.substring(1);
-        if (!arg.equals(letter)) {
-            throw new UnexpectedArgumentException(arg);
-        }
-        parsedArgs.add(new Arg(letter));
     }
 
     public Args build() {
