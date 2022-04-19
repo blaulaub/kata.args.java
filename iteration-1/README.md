@@ -44,6 +44,43 @@ I expect there will be two main things coming out:
 
 ### Step 5: Implement
 
+Disclaimer: Since this is an Uncle Bob Kata, I try to implement it
+TDD-style.
+
+- 3h: implement simple arguments (no arg values)
+  - Learned/seen/done:
+    - first, outline use case(s)
+      (see [SimpleUsageTest.java](src/test/java/ch/patchcode/kata/args/it1/SimpleUsageTest.java))
+      - helps to write down the API in code
+      - test does not assert anything
+      - may or will break when behavior is added or modified
+        (keep test expectations low, don't assert anything; only expectation is to compile)
+    - do error handling early
+      (see [ErrorHandlingTest.java](src/test/java/ch/patchcode/kata/args/it1/ErrorHandlingTest.java))
+    - growth from factory method to factory class to builder class
+      (see [ArgsBuilder.java](src/main/java/ch/patchcode/kata/args/it1/ArgsBuilder.java))
+      - began with a factory method in the result class
+      - became heavy (and noisy), moved to a factory class (no state)
+      - grew further, accumulated state in the method, hence changed
+        to a builder class
+        - before, schema was a parameter to the factory method and the
+          factory class, now schema became a constructor argument
+          (configuring the builder class)
+        - "state in the method" are method-local variables that are accessed
+          not only line-local but througout the method 
+  - using git features a lot: `amend`, `stash`, `rebase -i`
+  - working on three fronts:
+    - `*.java` (implementing and testing)
+    - `pom.xml` (configuration)
+    - `README.md` (keeping track)
+  - sometimes lost stashes (`git stash pop` later followed by `git checkout -- .`)
+  - the IDE (IntelliJ) suggested that 3 out of 4 classes produced so far
+    (`Arg`, `Args` and `Parameter`, but not `ArgsBuilder`) _could_ be converted
+    to Java records, but then also warned that conversion would make the so-far
+    private fields public and thus weaken visibility
+    - putting the focus on "OO is about messaging" (Alan Key, Robert C. Martin),
+      (also see Clean Code Episode 5 @46:58, @48:28, most of all @49:01)
+
 ...ongoing
 
 # Unexpected time-outs
