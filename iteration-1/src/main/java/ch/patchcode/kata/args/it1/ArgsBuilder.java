@@ -12,11 +12,7 @@ public class ArgsBuilder {
         this.schemaParts = Arrays
                 .stream(schema.split("\\|"))
                 .filter(it -> !it.isEmpty())
-                .map(it -> {
-                    var shortOptionLetter = it.substring(0, 1);
-                    var modifier = it.length() > 1 ? it.substring(1) : "";
-                    return new Parameter(shortOptionLetter, modifier);
-                })
+                .map(Parameter::fromParameter)
                 .collect(Collectors.<Parameter, String, Parameter>toMap(Parameter::shortOptionLetter, it -> it));
     }
 
