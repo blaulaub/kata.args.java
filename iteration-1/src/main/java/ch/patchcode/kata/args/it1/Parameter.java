@@ -18,4 +18,8 @@ public class Parameter {
     public String shortOptionLetter() {
         return shortOptionLetter;
     }
+
+    public boolean hasValue() {
+        return modifier.length() > 0;
+    }
 }
