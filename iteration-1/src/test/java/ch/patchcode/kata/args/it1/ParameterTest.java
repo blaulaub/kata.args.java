@@ -8,15 +8,15 @@ class ParameterTest {
 
     @Test
     void parameterWithoutModifier_hasNoValue() {
-        var x = Parameter.fromParameter("n");
-        assertEquals("n", x.shortOptionLetter());
-        assertFalse(x.hasValue());
+        var parameter = Parameter.fromSchemaPart("n");
+        assertEquals("n", parameter.shortOptionLetter());
+        assertFalse(parameter.hasValue());
     }
 
     @Test
     void parameterWithModifier_hasValue() {
-        var x = Parameter.fromParameter("n(Integer)");
-        assertEquals("n", x.shortOptionLetter());
-        assertTrue(x.hasValue());
+        var parameter = Parameter.fromSchemaPart("n(Integer)");
+        assertEquals("n", parameter.shortOptionLetter());
+        assertTrue(parameter.hasValue());
     }
 }

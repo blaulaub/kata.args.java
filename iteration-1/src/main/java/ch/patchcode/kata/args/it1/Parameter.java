@@ -4,7 +4,7 @@ public class Parameter {
     private final String shortOptionLetter;
     private final String modifier;
 
-    static Parameter fromParameter(String schemaPart) {
+    static Parameter fromSchemaPart(String schemaPart) {
         var shortOptionLetter = schemaPart.substring(0, 1);
         var modifier = schemaPart.length() > 1 ? schemaPart.substring(1) : "";
         return new Parameter(shortOptionLetter, modifier);

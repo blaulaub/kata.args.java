@@ -14,7 +14,7 @@ public class ArgsBuilder {
         this.schemaParts = Arrays
                 .stream(schema.split("\\|"))
                 .filter(it -> !it.isEmpty())
-                .map(Parameter::fromParameter)
+                .map(Parameter::fromSchemaPart)
                 .collect(Collectors.<Parameter, String, Parameter>toMap(Parameter::shortOptionLetter, it -> it));
     }
 
