@@ -112,6 +112,11 @@ Conclusion, measures:
 
 - none yet
 
+#### Second Implementation Session
+
+Spent 45 minutes parsing an additional 'modifier' string or suffix in the
+schema part after the short option letter.
+
 ...ongoing
 
 # Unexpected time-outs
