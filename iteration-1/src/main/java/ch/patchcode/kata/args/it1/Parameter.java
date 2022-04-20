@@ -22,4 +22,8 @@ public class Parameter {
     public boolean hasValue() {
         return modifier.length() > 0;
     }
+
+    public String getValueTypeLiteral() {
+        return "Integer";
+    }
 }

@@ -18,5 +18,6 @@ class ParameterTest {
         var parameter = Parameter.fromSchemaPart("n(Integer)");
         assertEquals("n", parameter.shortOptionLetter());
         assertTrue(parameter.hasValue());
+        assertEquals("Integer", parameter.getValueTypeLiteral());
     }
 }
