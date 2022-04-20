@@ -3,23 +3,26 @@ package ch.patchcode.kata.args.it1;
 import java.util.regex.Pattern;
 
 public class Parameter {
+
+    // refactoring hint: this constant has nothing to do with Parameter but all with
+    // Parameter construction, so it probably fits better into a Parameter factory or builder
+    public static final Pattern VALUE_TYPE_PATTERN = Pattern.compile("^\\(([^)]+)\\)$");
+
     private final String shortOptionLetter;
-    private final String modifier;
     private final String valueTypeLiteral;
 
     static Parameter fromSchemaPart(String schemaPart) {
+        // refactoring hint: this lot of code that has nothing to do with Parameter but all with
+        // Parameter construction, so it probably fits better into a Parameter factory or builder
         var shortOptionLetter = schemaPart.substring(0, 1);
         String remainder = schemaPart.substring(1);
-        var modifier = remainder.length() > 0 ? remainder : "";
-        var pattern = Pattern.compile("^\\(([^)]+)\\)$");
-        var matcher = pattern.matcher(modifier);
+        var matcher = VALUE_TYPE_PATTERN.matcher(remainder.length() > 0 ? remainder : "");
         String valueTypeLiteral = matcher.find() ? matcher.group(1) : "";
-        return new Parameter(shortOptionLetter, modifier, valueTypeLiteral);
+        return new Parameter(shortOptionLetter, valueTypeLiteral);
     }
 
-    private Parameter(String shortOptionLetter, String modifier, String valueTypeLiteral) {
+    private Parameter(String shortOptionLetter, String valueTypeLiteral) {
         this.shortOptionLetter = shortOptionLetter;
-        this.modifier = modifier;
         this.valueTypeLiteral = valueTypeLiteral;
     }
 
@@ -28,7 +31,7 @@ public class Parameter {
     }
 
     public boolean hasValue() {
-        return modifier.length() > 0;
+        return valueTypeLiteral.length() > 0;
     }
 
     public String getValueTypeLiteral() {
