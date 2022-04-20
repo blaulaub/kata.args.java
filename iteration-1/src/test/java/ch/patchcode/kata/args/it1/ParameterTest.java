@@ -14,10 +14,18 @@ class ParameterTest {
     }
 
     @Test
-    void parameterWithModifier_hasValue() {
+    void parameterWithInteger_hasMatchingValueTypeLiteral() {
         var parameter = Parameter.fromSchemaPart("n(Integer)");
         assertEquals("n", parameter.shortOptionLetter());
         assertTrue(parameter.hasValue());
         assertEquals("Integer", parameter.getValueTypeLiteral());
+    }
+
+    @Test
+    void parameterWithString_hasMatchingValueTypeLiteral() {
+        var parameter = Parameter.fromSchemaPart("t(String)");
+        assertEquals("t", parameter.shortOptionLetter());
+        assertTrue(parameter.hasValue());
+        assertEquals("String", parameter.getValueTypeLiteral());
     }
 }
