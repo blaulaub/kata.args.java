@@ -39,7 +39,8 @@ public class ArgsBuilder {
                     parsedArgs.add(new Arg(shortOptionLetter, Integer.valueOf(valueString)));
                 }
             } else {
-                throw new RuntimeException("not implemented: " + parameter.getValueTypeLiteral());
+                String valueString = arg.substring(2);
+                parsedArgs.add(new Arg(shortOptionLetter, valueString));
             }
 
         }
