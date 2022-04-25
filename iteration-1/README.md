@@ -117,18 +117,39 @@ Conclusion, measures:
 Spent 45 minutes parsing an additional 'modifier' string or suffix in the
 schema part after the short option letter.
 
-...ongoing
+#### Third Implementation Session
+
+Spent 15 minutes or so parsing Strings and Integers.
 
 # Unexpected time-outs
 
 - how to use Hamcrest with JUnit5 (simple answer by stack Overflow)
 
-# Ideas for future changes
+# Conclusion
+
+It somehow works. I am not happy with the code that came out by this "TDD".
+I have an idea what the code should more look like at the end, and I wonder
+if I could have done better with different refactoring; like Uncle Bob did
+in the Bowling Kata screencast.
+
+In general:
+- I should not have split the tests (as I did, into error handling, no
+  arguments, with arguments, and test for utility class). I should have
+  written one incremental suite of tests.
+- I should have refactored differently. TDD does not guide the refactoring,
+  and the choice of refactoring seems quite important for the outcome.
+  - I ended up with four classes, three of which the IDE tells me should or
+    could be records.
+  - I would prefer to have a chain of responsibility, or rather two (one for
+    the schema, one for the arguments), to do the parsing (this saves me the
+    loops, and it probably gives nice, polymorphic code)
+
+# Appendix: Ideas for future changes
 
 - when an unexpected argument is encountered, include its
   position in the error message (for better usability)
 
-# Other ideas
+# Appendix: Other ideas
 
 - commit timer: how long ago was my last (local) commit or
   my last (public) push; have I got stuck or delayed?
