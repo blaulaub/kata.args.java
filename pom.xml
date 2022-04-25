@@ -17,6 +17,7 @@
 
     <modules>
         <module>iteration-1</module>
+        <module>iteration-2</module>
     </modules>
 
 </project>
