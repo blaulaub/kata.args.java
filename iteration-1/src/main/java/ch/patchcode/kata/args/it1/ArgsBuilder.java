@@ -24,11 +24,24 @@ public class ArgsBuilder {
             var arg = argList.pollFirst();
 
             if (!arg.startsWith("-")) throw new UnexpectedArgumentException(arg);
-            String shortOptionLetter = arg.substring(1);
+            String shortOptionLetter = arg.substring(1,2);
 
-            if (!schemaParts.containsKey(shortOptionLetter)) throw new UnexpectedArgumentException(arg);
+            Parameter parameter = schemaParts.get(shortOptionLetter);
+            if (parameter == null) throw new UnexpectedArgumentException(arg);
 
-            parsedArgs.add(new Arg(shortOptionLetter));
+            if (parameter.getValueTypeLiteral() == null || parameter.getValueTypeLiteral().equals("")) {
+                parsedArgs.add(new Arg(shortOptionLetter));
+            } else if (parameter.getValueTypeLiteral().equals("Integer")) {
+                String valueString = arg.substring(2);
+                if (valueString.equals("")) {
+                    parsedArgs.add(new Arg(shortOptionLetter, 0));
+                } else {
+                    parsedArgs.add(new Arg(shortOptionLetter, Integer.valueOf(valueString)));
+                }
+            } else {
+                throw new RuntimeException("not implemented: " + parameter.getValueTypeLiteral());
+            }
+
         }
         return this;
     }
